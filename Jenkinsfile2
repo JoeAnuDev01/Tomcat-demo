@@ -1,7 +1,7 @@
 node {  
     def mvnHome = tool name: 'maven home', type: 'maven'
     stage('SCM-Checkout') { 
-        git branch: 'main', credentialsId: 'Git-Credentials', url: 'https://github.com/vikas99341/tomcat-demo.git' 
+        git branch: 'main', credentialsId: 'Git-Credentials', url: 'https://github.com/JoeAnuDev01/tomcat-demo.git' 
     }
     stage('mvn-clean') { 
         sh "${mvnHome}/bin/mvn clean"
@@ -16,8 +16,8 @@ node {
         sh "${mvnHome}/bin/mvn package"
     }
     stage('sonar-analysis') { 
-		withSonarQubeEnv('My SonarQube Server') {
-          sh "${mvnHome}/bin/mvn sonar:sonar"
-      }
+	withSonarQubeEnv('My SonarQube Server') {
+          sh '${mvnHome}/bin/mvn sonar:sonar'
+        }
     }
 }
